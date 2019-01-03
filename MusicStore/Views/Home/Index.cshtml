@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<MusicStoreUser> SignInManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if (this.SignInManager.IsSignedIn(User))
+{
+    <h1>Здравейте, @SignInManager.UserManager.GetUserName(User),</h1>
+}
+
+<h1>Welcome to our online <b>Music Store</b>!!!</h1>
+<br/>
+<h1>Love you, Zache!!!</h1>
+<br />
+<body>
+<div class="container panel-body">
+    <div class="row">
+        <div class="col-sm-4">
+            One of three columns
+        </div>
+        <div class="col-sm-4">
+            One of three columns
+        </div>
+        <div class="col-sm-4">
+            One of three columns
+        </div>
+    </div>
+</div>
+</body>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            1 of 2
+        </div>
+        <div class="col-lg-6">
+            2 of 2
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            1 of 3
+        </div>
+        <div class="col-lg-4">
+            2 of 3
+        </div>
+        <div class="col-lg-4">
+            3 of 3
+        </div>
+    </div>
+</div>

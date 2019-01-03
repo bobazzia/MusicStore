@@ -13,7 +13,7 @@ namespace MusicStore.Models
 
         public string Name { get; set; }
 
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
 
         public double Price { get; set; }
 

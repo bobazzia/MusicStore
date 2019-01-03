@@ -1,48 +1,18 @@
-﻿@using Microsoft.AspNetCore.Razor.Language.Intermediate
-@model MusicStore.ViewModels.AdministratorProductViewModel
-
-<div class="container panel-body">
-    <div class="row, text-center">
-        Products
-        <div>
-            @if (Model.Products.Count == 0)
-            {
-                <div>No products!</div>
-            }
-            else
-            {
-                foreach (var product in Model.Products)
-                {
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-2">
-                                @product.Name
-                            </div>
-                            <div class="col-md-2">
-                                @product.Description
-                            </div>
-                            <div class="col-md-2">
-                                @product.Image
-                            </div>
-                            <div class="col-md-2">
-                                @product.Price
-                            </div>
-                            <div class="col-md-2">
-                                @product.Description
-                            </div>
-                        </div>
-                    </div>
-                    <center>
-                        <form method="get" asp-controller="Administrator" asp-action="Edit" asp-route-id="@product.Id">
-                            <button type="submit" data-item-id="@product.Id">Edit</button>
-                        </form>
-                        <form method="post" asp-controller="Administrator" asp-action="Delete" asp-route-id="@product.Id">
-                            <button type="submit" data-item-id="@product.Id">Delete</button>
-                        </form>
-                    </center>
-                }
-            }
-            <div><a asp-area="" asp-controller="Administrator" asp-action="AddProduct">Add Product</a></div>
-        </div>
-    </div>
-</div>
+﻿<center>
+    <h1>
+        <a asp-controller="Administrator" asp-action="Products">Products</a>
+    </h1>
+    <br/>
+</center>
+<center>
+    <h1>
+        <a asp-controller="Administrator" asp-action="Sales">Sales</a>
+    </h1>
+    <br />
+</center>
+<center>
+    <h1>
+        <a asp-controller="Administrator" asp-action="Events">Events</a>
+    </h1>
+    <br />
+</center>

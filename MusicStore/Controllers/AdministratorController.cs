@@ -19,7 +19,12 @@ namespace MusicStore.Controllers
     [Authorize(Roles = "Administrator")]
     public class AdministratorController : BaseController
     {
-        public IActionResult Index(AdministratorProductViewModel model)
+        public IActionResult Index()
+        {
+            return this.View();
+        }
+
+        public IActionResult Products(AdministratorProductViewModel model)
         {
             model.Products = this.Db.Products.ToList();
             return this.View(model);
@@ -36,30 +41,33 @@ namespace MusicStore.Controllers
             var product = new Product()
             {
                 Name = model.Name,
-                Image = Encoding.ASCII.GetBytes(model.Image),
+                Image = model.Image,
                 Price = model.Price,
                 Description = model.Description, 
                 Category = model.Category
             };
             this.Db.Products.Add(product);
             this.Db.SaveChanges();
-            return RedirectToAction("Index", "Administrator");
+            return RedirectToAction("Products", "Administrator");
         }
 
-        
-        public IActionResult Edit(int id, AddProductViewModel Product)
+        public IActionResult EditProduct(int id)
         {
-            var product = this.Db.Products.FirstOrDefault(p => p.Id == id);
-            if (product != null)
+            var product = this.Db.Products.Find(id);// FirstOrDefault(p => p.Id == id);
+           
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(int id, Product product)
+        {
+            if (ModelState.IsValid)
             {
-                Product.Name = product.Name;
-                Product.Description = product.Description;
-                var bytesToString = Encoding.UTF8.GetString(product.Image);
-                Product.Image = bytesToString;
-                Product.Price = product.Price;
-                Product.Category = product.Category;
+                Db.Entry(product).State = EntityState.Modified;
+                Db.SaveChanges();
+                return RedirectToAction("Products");
             }
-            return View(Product);
+            return View(product);
         }
 
         [HttpPost]
@@ -69,7 +77,7 @@ namespace MusicStore.Controllers
             this.Db.Products.Remove(product);
             this.Db.SaveChanges();
 
-            return RedirectToAction("Index", "Administrator");
+            return RedirectToAction("Products", "Administrator");
         }
     }
 }

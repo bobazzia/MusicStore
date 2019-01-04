@@ -1,0 +1,23 @@
+﻿@model MusicStore.ViewModels.Administrator.AddSaleViewModel
+
+<form method="post" class="center-block">
+    <hr style="height: 3px; background-color: black" />
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PercentOff"></label>
+                <input asp-for="PercentOff" class="form-control" />
+                <span asp-validation-for="PercentOff" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default" style="background-color: black; color: white">Add Sale</button>
+    </div>
+</form>

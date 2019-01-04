@@ -6,18 +6,23 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MusicStore.Models;
+using MusicStore.Services;
+using MusicStore.Services.Interfaces;
 using MusicStore.ViewModels;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace MusicStore.Controllers
 {
     public class AccountController : BaseController
     {
         private SignInManager<MusicStoreUser> signIn;
-        
 
-        public AccountController(SignInManager<MusicStoreUser> signIn)
+        protected IUserService UserService { get; }
+
+        public AccountController(SignInManager<MusicStoreUser> signIn, IUserService userService)
         {
             this.signIn = signIn;
+            UserService = userService;
         }
 
         public IActionResult Login()
@@ -28,21 +33,13 @@ namespace MusicStore.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
-            var user = this.signIn.UserManager.Users.FirstOrDefault(u => u.UserName == model.Username);
-            if (user == null)
+            var result = this.UserService.UserLogin(model);
+            if (result != SignInResult.Success)
             {
                 return this.View();
             }
-            var passwordCheck = this.signIn.CheckPasswordSignInAsync(user, model.Password, false).Result;
-            if (!passwordCheck.Succeeded)
-            {
-                return this.View();
-            }
-            this.signIn.SignInAsync(user, model.RememberMe).Wait();
-
             return RedirectToAction("Index", "Home");
         }
-
 
         public IActionResult Register()
         {
@@ -52,37 +49,19 @@ namespace MusicStore.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {
-            var user = new MusicStoreUser()
-            {
-                Email = model.Email,
-                UserName = model.Email,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                PhoneNumber = model.PhoneNumber
-            };
-            var result = this.signIn.UserManager.CreateAsync(user, model.Password).Result;
-
-            if (this.signIn.UserManager.Users.Count() == 1)
-            {
-                var roleResult = this.signIn.UserManager.AddToRoleAsync(user, "Administrator").Result;
-                if (roleResult.Errors.Any())
-                {
-                    return this.View();
-                }
-            }
-
+            var result = this.UserService.RegisterUser(model).Result;
+            
             if (result.Succeeded)
             {
-                this.signIn.SignInAsync(user, false).Wait();
                 return this.RedirectToAction("Index", "Home");
             }
             return this.View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Logout()
+        
+        public IActionResult Logout()
         {
-            await signIn.SignOutAsync();
+            this.UserService.Logout();
             return RedirectToAction("Index", "Home");
         }
     }

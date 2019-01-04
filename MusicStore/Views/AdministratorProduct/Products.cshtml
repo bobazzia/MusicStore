@@ -33,10 +33,10 @@
                                 @product.Category
                             </div>
                             <div class="col-md-4">
-                                <form method="get" asp-controller="Administrator" asp-action="EditProduct" asp-route-id="@product.Id">
+                                <form method="get" asp-controller="AdministratorProduct" asp-action="EditProduct" asp-route-id="@product.Id">
                                     <button type="submit" data-item-id="@product.Id">Edit</button>
                                 </form>
-                                <form method="post" asp-controller="Administrator" asp-action="Delete" asp-route-id="@product.Id">
+                                <form method="post" asp-controller="AdministratorProduct" asp-action="Delete" asp-route-id="@product.Id">
                                     <button type="submit" data-item-id="@product.Id">Delete</button>
                                 </form>
                             </div>
@@ -45,7 +45,7 @@
                     <br/>
                 }
             }
-            <div><a asp-area="" asp-controller="Administrator" asp-action="AddProduct"><h3>Add Product</h3></a></div>
+            <div><a asp-area="" asp-controller="AdministratorProduct" asp-action="AddProduct"><h3>Add Product</h3></a></div>
         </div>
     </div>
 </div>

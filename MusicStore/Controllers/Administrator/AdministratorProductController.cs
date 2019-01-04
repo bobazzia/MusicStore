@@ -1,29 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
-using MusicStore.Data;
 using MusicStore.Models;
 using MusicStore.ViewModels;
 using MusicStore.ViewModels.Administrator;
 
-namespace MusicStore.Controllers
+namespace MusicStore.Controllers.Administrator
 {
-    
-    [Authorize(Roles = "Administrator")]
-    public class AdministratorController : BaseController
+    public class AdministratorProductController : AdministratorController
     {
-        public IActionResult Index()
-        {
-            return this.View();
-        }
-
         public IActionResult Products(AdministratorProductViewModel model)
         {
             model.Products = this.Db.Products.ToList();
@@ -43,18 +31,18 @@ namespace MusicStore.Controllers
                 Name = model.Name,
                 Image = model.Image,
                 Price = model.Price,
-                Description = model.Description, 
+                Description = model.Description,
                 Category = model.Category
             };
             this.Db.Products.Add(product);
             this.Db.SaveChanges();
-            return RedirectToAction("Products", "Administrator");
+            return RedirectToAction("Products", "AdministratorProduct");
         }
 
         public IActionResult EditProduct(int id)
         {
             var product = this.Db.Products.Find(id);// FirstOrDefault(p => p.Id == id);
-           
+
             return View(product);
         }
 
@@ -77,7 +65,7 @@ namespace MusicStore.Controllers
             this.Db.Products.Remove(product);
             this.Db.SaveChanges();
 
-            return RedirectToAction("Products", "Administrator");
+            return RedirectToAction("Products", "AdministratorProduct");
         }
     }
 }

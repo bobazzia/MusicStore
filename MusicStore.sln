@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicStore.Models", "MusicS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicStore.Data", "MusicStore.Data\MusicStore.Data.csproj", "{371E2FF4-3FB7-41D2-88F3-6F06C4C6266A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStore.Services", "MusicStore.Services\MusicStore.Services.csproj", "{230E123E-4A7B-4390-B122-6B808E276757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStore.ViewModels", "MusicStore.ViewModels\MusicStore.ViewModels.csproj", "{41FCCABE-9CDD-4AC9-9042-3F0F0C6272F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{371E2FF4-3FB7-41D2-88F3-6F06C4C6266A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{371E2FF4-3FB7-41D2-88F3-6F06C4C6266A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{371E2FF4-3FB7-41D2-88F3-6F06C4C6266A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{230E123E-4A7B-4390-B122-6B808E276757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{230E123E-4A7B-4390-B122-6B808E276757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{230E123E-4A7B-4390-B122-6B808E276757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{230E123E-4A7B-4390-B122-6B808E276757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41FCCABE-9CDD-4AC9-9042-3F0F0C6272F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41FCCABE-9CDD-4AC9-9042-3F0F0C6272F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41FCCABE-9CDD-4AC9-9042-3F0F0C6272F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41FCCABE-9CDD-4AC9-9042-3F0F0C6272F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

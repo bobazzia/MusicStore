@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Razor.Language.Intermediate
+@model MusicStore.ViewModels.Administrator.AdministratorSalesViewModel
+
+<div class="container panel-body">
+    <div class="row, text-center">
+        Products
+        <div>
+            @if (Model.Sales.Count == 0)
+            {
+                <div>No Sales!</div>
+            }
+            else
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            Sale Name
+                        </div>
+                        <div class="col-md-3">
+                            Sale PercentOff
+                        </div>
+                        <div class="col-md-3">
+                            Products
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+                foreach (var sale in Model.Sales)
+                {
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                @sale.Name
+                            </div>
+                            <div class="col-md-3">
+                                @sale.PercentOffPrice
+                            </div>
+                            @if (sale.Products.Count == 0)
+                            {
+                                <a asp-controller="AdministratorSales" asp-action="AddProducts" class="col-md-3"> Add Products</a>
+                            }
+                            else
+                            {
+                                foreach(var product in sale.Products)
+                                {
+                                    <div>@product.Name- @product.Category</div>
+                                }
+                            }
+                            <div class="col-md-3">
+                                <form method="post" asp-controller="AdministratorSales" asp-action="Delete" asp-route-id="@sale.Id">
+                                    <button type="submit" data-item-id="@sale.Id">Delete Sale</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                }
+            }
+            <div><a asp-area="" asp-controller="AdministratorSales" asp-action="AddSale"><h3>Add Sale</h3></a></div>
+        </div>
+    </div>
+</div>

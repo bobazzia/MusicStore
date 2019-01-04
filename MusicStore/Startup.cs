@@ -13,6 +13,8 @@ using MusicStore.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MusicStore.Models;
+using MusicStore.Services;
+using MusicStore.Services.Interfaces;
 using MusicStore.Utilities;
 
 namespace MusicStore
@@ -59,6 +61,8 @@ namespace MusicStore
                 options.LogoutPath = $"/Identity/Account/Logout";
                 options.AccessDeniedPath = $"/Account/AccessDenied";
             });
+
+            services.AddScoped<IUserService, UserService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

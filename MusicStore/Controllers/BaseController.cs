@@ -6,9 +6,9 @@ namespace MusicStore.Controllers
 {
     public class BaseController : Controller
     {
-        public BaseController()
+        public BaseController(MusicStoreDbContext dbContext)
         {
-            this.Db = new MusicStoreDbContext(new DbContextOptions<MusicStoreDbContext>());
+            this.Db = dbContext;
         }
 
         public MusicStoreDbContext Db { get; set; }

@@ -14,6 +14,10 @@ namespace MusicStore.Data
         {
         }
 
+        public MusicStoreDbContext()
+        {
+        }
+
         public DbSet<Comment> Comments { get; set; }
 
         public DbSet<Event> Events { get; set; }

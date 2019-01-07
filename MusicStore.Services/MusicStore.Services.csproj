@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MusicStore.Data\MusicStore.Data.csproj" />
     <ProjectReference Include="..\MusicStore.Models\MusicStore.Models.csproj" />
     <ProjectReference Include="..\MusicStore.ViewModels\MusicStore.ViewModels.csproj" />

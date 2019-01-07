@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MusicStore.Data;
 using MusicStore.Models;
 using MusicStore.Services;
 using MusicStore.Services.Interfaces;
@@ -19,7 +20,8 @@ namespace MusicStore.Controllers
 
         protected IUserService UserService { get; }
 
-        public AccountController(SignInManager<MusicStoreUser> signIn, IUserService userService)
+        public AccountController(SignInManager<MusicStoreUser> signIn, IUserService userService, MusicStoreDbContext dbContext) 
+            : base(dbContext)
         {
             this.signIn = signIn;
             UserService = userService;

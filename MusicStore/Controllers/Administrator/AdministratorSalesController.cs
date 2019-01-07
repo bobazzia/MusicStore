@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MusicStore.Data;
 using MusicStore.Models;
 using MusicStore.ViewModels;
 using MusicStore.ViewModels.Administrator;
@@ -11,6 +12,10 @@ namespace MusicStore.Controllers.Administrator
 {
     public class AdministratorSalesController : AdministratorController
     {
+        public AdministratorSalesController(MusicStoreDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public IActionResult Sales(AdministratorSalesViewModel model)
         {
             model.Sales = this.Db.Sales.ToList();
@@ -44,6 +49,8 @@ namespace MusicStore.Controllers.Administrator
 
             return RedirectToAction("Sales", "AdministratorSales");
         }
+
+        
     }
 
    

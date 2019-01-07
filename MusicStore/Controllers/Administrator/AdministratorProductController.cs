@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MusicStore.Data;
 using MusicStore.Models;
+using MusicStore.Services.Interfaces;
 using MusicStore.ViewModels;
 using MusicStore.ViewModels.Administrator;
 
@@ -12,6 +14,14 @@ namespace MusicStore.Controllers.Administrator
 {
     public class AdministratorProductController : AdministratorController
     {
+        public AdministratorProductController(MusicStoreDbContext dbContext, IProductService productService) 
+            : base(dbContext)
+        {
+            this.ProductService = productService;
+        }
+
+        protected IProductService ProductService { get; }
+
         public IActionResult Products(AdministratorProductViewModel model)
         {
             model.Products = this.Db.Products.ToList();
@@ -26,22 +36,14 @@ namespace MusicStore.Controllers.Administrator
         [HttpPost]
         public IActionResult AddProduct(AddProductViewModel model)
         {
-            var product = new Product()
-            {
-                Name = model.Name,
-                Image = model.Image,
-                Price = model.Price,
-                Description = model.Description,
-                Category = model.Category
-            };
-            this.Db.Products.Add(product);
-            this.Db.SaveChanges();
+            this.ProductService.AddProduct(model);
+           
             return RedirectToAction("Products", "AdministratorProduct");
         }
 
         public IActionResult EditProduct(int id)
         {
-            var product = this.Db.Products.Find(id);// FirstOrDefault(p => p.Id == id);
+            var product = this.Db.Products.Find(id);
 
             return View(product);
         }
@@ -61,10 +63,7 @@ namespace MusicStore.Controllers.Administrator
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            var product = this.Db.Products.FirstOrDefault(p => p.Id == id);
-            this.Db.Products.Remove(product);
-            this.Db.SaveChanges();
-
+            this.ProductService.DeleteProduct(id);
             return RedirectToAction("Products", "AdministratorProduct");
         }
     }

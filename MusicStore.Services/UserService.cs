@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using MusicStore.Models;
 using MusicStore.Data;
 using MusicStore.Services.Interfaces;
@@ -12,7 +11,8 @@ namespace MusicStore.Services
 {
     public class UserService : BaseService, IUserService
     {
-        public UserService(MusicStoreDbContext dbContext, SignInManager<MusicStoreUser> signIn) 
+        public UserService(MusicStoreDbContext dbContext, 
+            SignInManager<MusicStoreUser> signIn) 
             : base(dbContext, signIn)
         {
         }

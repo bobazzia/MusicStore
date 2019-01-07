@@ -24,6 +24,7 @@
     <ProjectReference Include="..\MusicStore.Data\MusicStore.Data.csproj" />
     <ProjectReference Include="..\MusicStore.Models\MusicStore.Models.csproj" />
     <ProjectReference Include="..\MusicStore.Services\MusicStore.Services.csproj" />
+    <ProjectReference Include="..\MusicStore.ViewModels\MusicStore.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

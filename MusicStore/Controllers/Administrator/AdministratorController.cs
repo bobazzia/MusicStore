@@ -19,9 +19,15 @@ namespace MusicStore.Controllers
     [Authorize(Roles = "Administrator")]
     public class AdministratorController : BaseController
     {
+        public AdministratorController(MusicStoreDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public IActionResult Index()
         {
             return this.View();
         }
+
+        
     }
 }

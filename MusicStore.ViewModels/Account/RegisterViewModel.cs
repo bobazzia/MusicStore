@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace MusicStore.ViewModels
+namespace MusicStore.ViewModels.Account
 {
     public class RegisterViewModel
     {
@@ -19,9 +15,10 @@ namespace MusicStore.ViewModels
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Confirm Password is required")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
         [Required]

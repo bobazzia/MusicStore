@@ -6,6 +6,7 @@ using MusicStore.Models;
 using MusicStore.Data;
 using MusicStore.Services.Interfaces;
 using MusicStore.ViewModels;
+using MusicStore.ViewModels.Account;
 
 namespace MusicStore.Services
 {

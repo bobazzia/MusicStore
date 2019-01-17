@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using MusicStore.Models;
 
 namespace MusicStore.ViewModels.Administrator
@@ -12,7 +13,7 @@ namespace MusicStore.ViewModels.Administrator
         [Required]
         public string Name { get; set; }
 
-        public string Image { get; set; }
+        public IFormFile Image { get; set; }
 
         public double Price { get; set; }
 

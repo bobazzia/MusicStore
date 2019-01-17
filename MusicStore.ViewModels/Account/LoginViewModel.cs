@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace MusicStore.ViewModels
+namespace MusicStore.ViewModels.Account
 {
     public class LoginViewModel
     {
@@ -12,6 +8,7 @@ namespace MusicStore.ViewModels
         [Display(Name = "Username")]
         public string Username { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

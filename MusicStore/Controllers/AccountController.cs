@@ -10,6 +10,7 @@ using MusicStore.Models;
 using MusicStore.Services;
 using MusicStore.Services.Interfaces;
 using MusicStore.ViewModels;
+using MusicStore.ViewModels.Account;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace MusicStore.Controllers
@@ -40,7 +41,7 @@ namespace MusicStore.Controllers
             {
                 return this.View();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Home", "User");
         }
 
         public IActionResult Register()

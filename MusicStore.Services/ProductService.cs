@@ -57,7 +57,9 @@ namespace MusicStore.Services
                 await image.CopyToAsync(stream);
             };
 
-            return filePath;
+            var result = filePath.Split('\\').TakeLast(1).ToArray()[0];
+            
+            return result;
         }
     }
 }

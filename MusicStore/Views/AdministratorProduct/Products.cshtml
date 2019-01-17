@@ -4,7 +4,7 @@
 
 <div class="container panel-body">
     <div class="row, text-center">
-        Products
+        <h1 style="color:dimgray">Products</h1>
         <div>
             @if (Model.Products.Count == 0)
             {
@@ -15,17 +15,16 @@
                 foreach (var product in Model.Products.OrderBy(p => p.Category)
                     .ThenBy(p => p.Name))
                 {
-                    <img src="https://www.google.com/search?q=cat&source=lnms&tbm=isch&sa=X&ved=0ahUKEwioqvr___TfAhWOs4sKHTIBAGEQ_AUIDigB&biw=1366&bih=657#imgrc=tGn0Xz3IWSwl0M:"/>
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 @product.Name
                             </div>
                             <div class="col-md-2">
                                 @product.Description
                             </div>
-                            <div class="col-md-2">
-                                <img src= "~\images\@product.Image" alt="Image"/>
+                            <div class="col-md-4">
+                                <img src= "~/images/@product.Image" alt="Image" width="300" height="300"/>
                             </div>
                             <div class="col-md-1">
                                 @product.Price
@@ -33,7 +32,7 @@
                             <div class="col-md-1">
                                 @product.Category
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-1">
                                 <form method="get" asp-controller="AdministratorProduct" asp-action="EditProduct" asp-route-id="@product.Id">
                                     <button type="submit" data-item-id="@product.Id">Edit</button>
                                 </form>

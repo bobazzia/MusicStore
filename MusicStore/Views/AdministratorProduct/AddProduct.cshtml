@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Category"></label>
-                <select asp-for="Category" asp-items="Html.GetEnumSelectList<Category>()">
+                <select asp-for="Category" asp-items="Html.GetEnumSelectList<Category>()" required>
                     <option selected="selected" value="">Please select</option>
                 </select>
                 <span asp-validation-for="Category" class="text-danger"></span>

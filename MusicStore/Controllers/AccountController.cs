@@ -56,7 +56,7 @@ namespace MusicStore.Controllers
             
             if (result.Succeeded)
             {
-                return this.RedirectToAction("Index", "Home");
+                return this.RedirectToAction("Home", "User");
             }
             return this.View();
         }

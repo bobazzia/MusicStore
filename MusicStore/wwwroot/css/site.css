@@ -12,6 +12,9 @@ body {
     padding-right: 15px;
 }
 
+.footer-margin {
+    height: 100px;
+}
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;

@@ -1,0 +1,29 @@
+﻿@model MusicStore.ViewModels.User.UserProductsViewModel
+
+<h1 class="text-center text-capitalize glyphicon-bold">A C C E S S O R I E S</h1>
+<hr/>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in Model.Products)
+    {
+        <tr>
+            <td>@product.Name</td>
+            <td>@product.Description</td>
+            <td>
+                <a href="~/images/@product.Image" target="_blank">
+                    <img src="~/images/@product.Image" width="80" height="80" alt='some thumbnail' />
+                </a>
+            </td>
+            <td>@product.Price</td>
+        </tr>
+    }
+    </tbody>
+</table>

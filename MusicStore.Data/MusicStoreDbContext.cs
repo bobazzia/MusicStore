@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,12 @@ namespace MusicStore.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<MusicStoreUser>()
+                .HasOne(u => u.Order)
+                .WithOne(x => x.User)
+                .HasForeignKey<Order>();
+                
             
             builder.Entity<MusicStoreUser>().ToTable("MusicStoreUsers");
         }

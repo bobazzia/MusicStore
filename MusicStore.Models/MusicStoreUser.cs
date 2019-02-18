@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace MusicStore.Models
@@ -21,6 +22,11 @@ namespace MusicStore.Models
         public string Email { get; set; }
 
         public string PhoneNumber { get; set; }
+        
+        public int? OrderId { get; set; }
+
+        [ForeignKey("OrderId")]
+        public  virtual Order Order { get; set; }
 
         public ICollection<Order> Orders { get; set; }
 

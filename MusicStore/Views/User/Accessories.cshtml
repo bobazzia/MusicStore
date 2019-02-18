@@ -1,6 +1,7 @@
 ﻿@model MusicStore.ViewModels.User.UserProductsViewModel
 
 <h1 class="text-center text-capitalize glyphicon-bold">A C C E S S O R I E S</h1>
+<h3 class="text-center text">Hello, @Model.User.FirstName @Model.User.LastName! Your have <span class="text-primary">(@Model.User.Order.Products.Count)</span> products in your order!</h3>
 <hr/>
 <table class="table table-striped">
     <thead class="thead-dark">
@@ -23,6 +24,11 @@
                 </a>
             </td>
             <td>@product.Price</td>
+            <td>
+                <form method="post" asp-controller="User" asp-action="Accessories" asp-route-id="@product.Id">
+                    <button type="submit" data-item-id="@product.Id">Add to cart</button>
+                </form>
+            </td>
         </tr>
     }
     </tbody>

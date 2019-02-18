@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicStore.Data;
 
 namespace MusicStore.Data.Migrations
 {
     [DbContext(typeof(MusicStoreDbContext))]
-    partial class MusicStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190215142648_ChangeOrder")]
+    partial class ChangeOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,13 +141,15 @@ namespace MusicStore.Data.Migrations
 
                     b.Property<int>("ProductId");
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserId1");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Comments");
                 });
@@ -162,11 +166,13 @@ namespace MusicStore.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserId1");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Events");
                 });
@@ -200,7 +206,7 @@ namespace MusicStore.Data.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
 
-                    b.Property<int?>("OrderId");
+                    b.Property<int>("OrderId");
 
                     b.Property<string>("PasswordHash");
 
@@ -238,15 +244,17 @@ namespace MusicStore.Data.Migrations
 
                     b.Property<string>("MusicStoreUserId");
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserId1");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MusicStoreUserId");
 
-                    b.HasIndex("UserId")
+                    b.HasIndex("UserId1")
                         .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                        .HasFilter("[UserId1] IS NOT NULL");
 
                     b.ToTable("Orders");
                 });
@@ -349,14 +357,14 @@ namespace MusicStore.Data.Migrations
 
                     b.HasOne("MusicStore.Models.MusicStoreUser", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("MusicStore.Models.Event", b =>
                 {
                     b.HasOne("MusicStore.Models.MusicStoreUser", "User")
                         .WithMany("Events")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("MusicStore.Models.Order", b =>
@@ -367,7 +375,7 @@ namespace MusicStore.Data.Migrations
 
                     b.HasOne("MusicStore.Models.MusicStoreUser", "User")
                         .WithOne("Order")
-                        .HasForeignKey("MusicStore.Models.Order", "UserId");
+                        .HasForeignKey("MusicStore.Models.Order", "UserId1");
                 });
 
             modelBuilder.Entity("MusicStore.Models.Product", b =>

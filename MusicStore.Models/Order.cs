@@ -6,7 +6,7 @@ namespace MusicStore.Models
     {
         public Order()
         {
-            this.Products = new HashSet<Product>();
+            this.Products = new List<Product>();
         }
 
         public int Id { get; set; }
@@ -15,8 +15,8 @@ namespace MusicStore.Models
 
         public ICollection<Product> Products { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
-        public MusicStoreUser User { get; set; }
+        public virtual MusicStoreUser User { get; set; }
     }
 }

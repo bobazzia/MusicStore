@@ -10,6 +10,8 @@ namespace MusicStore.ViewModels.User
             this.Products = new List<Product>();
         }
 
+        public MusicStoreUser User { get; set; }
+
         public List<Product> Products { get; set; }
     }
 }

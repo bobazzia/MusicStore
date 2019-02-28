@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MusicStore.ViewModels.Account
 {
@@ -15,10 +16,10 @@ namespace MusicStore.ViewModels.Account
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Confirm Password is required")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [NotMapped]
         [Compare("Password")]
+        [Display(Name = "Confirm password")]
+        [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
         [Required]

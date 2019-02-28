@@ -12,6 +12,8 @@ namespace MusicStore.Models
         public int Id { get; set; }
 
         public string Address { get; set; }
+        
+        public int ProductId { get; set; }
 
         public ICollection<Product> Products { get; set; }
 

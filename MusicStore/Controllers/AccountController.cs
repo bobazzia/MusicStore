@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Session;
 using MusicStore.Data;
 using MusicStore.Models;
 using MusicStore.Services;
@@ -41,7 +42,9 @@ namespace MusicStore.Controllers
             {
                 return this.View();
             }
-            return RedirectToAction("Home", "User");
+            
+            
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Register()

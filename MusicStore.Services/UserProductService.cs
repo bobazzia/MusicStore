@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MusicStore.Data;
 using MusicStore.Models;
 using MusicStore.Services.Interfaces;
@@ -13,7 +15,7 @@ namespace MusicStore.Services
         {
         }
 
-        public void AddProductToUserOrder(Product product, MusicStoreUser user)
+        public void AddProductToUserOrderAsync(Product product, MusicStoreUser user)
         {
             user.Order = this.DbContext.Orders.FirstOrDefault(o => o.UserId == user.Id);
 
@@ -32,6 +34,7 @@ namespace MusicStore.Services
             {
                 var order = this.DbContext.Orders.FirstOrDefault(o => o.UserId == user.Id);
                 order.Products.Add(product);
+               
                 this.DbContext.Orders.Attach(order);
                 this.DbContext.SaveChanges();
             }

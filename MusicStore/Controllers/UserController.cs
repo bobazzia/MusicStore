@@ -29,68 +29,91 @@ namespace MusicStore.Controllers
         {
             return View(model);
         }
+        
 
         public IActionResult Strings(UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var userId = HttpContext.User.Identity.Name;
             model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
             model.User.Order = this.Db.Orders.FirstOrDefault(u => u.UserId == model.User.Id);
+
             if (model.User.Order == null)
             {
-                model.User.Order = new Order();
+                var order = new Order()
+                {
+                    UserId = model.User.Id,
+                    User = model.User,
+                };
+                this.Db.Orders.Add(order);
+                this.Db.SaveChanges();
             }
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Strings).ToList();
+            
+            var testOrder = this.Db.Orders.FirstOrDefault(u => u.UserId == model.User.Id);
             return this.View(model);
         }
 
         [HttpPost]
         public IActionResult Strings(int id, UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var product = this.Db.Products.Find(id);
             var userId = HttpContext.User.Identity.Name;
             var user = this.Db.Users.FirstOrDefault(u => u.Email == userId);
+            var order = this.Db.Orders.FirstOrDefault(o => o.UserId == user.Id);
+            order.Products.Add(product);
+            this.Db.Orders.Update(order);
+            
+            this.Db.SaveChanges();
+            //this.UserProductService.AddProductToUserOrderAsync(product, user);
 
-            this.UserProductService.AddProductToUserOrder(product, user);
+
+            model.User = user;
+            model.User.Order = order;
             
-            
-            model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
-            model.User.Order = this.Db.Orders.FirstOrDefault(o => o.UserId == user.Id);
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Strings).ToList();
+            var testOrder = this.Db.Orders.FirstOrDefault(u => u.UserId == model.User.Id);
             return this.View(model);
         }
 
 
         public IActionResult Guitars(UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var userId = HttpContext.User.Identity.Name;
             model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
             model.User.Order = this.Db.Orders.FirstOrDefault(u => u.UserId == model.User.Id);
+
             if (model.User.Order == null)
             {
                 model.User.Order = new Order();
             }
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Guitars).ToList();
+            
             return this.View(model);
         }
 
         [HttpPost]
         public IActionResult Guitars(int id, UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var product = this.Db.Products.Find(id);
             var userId = HttpContext.User.Identity.Name;
             var user = this.Db.Users.FirstOrDefault(u => u.Email == userId);
+            var order = this.Db.Orders.FirstOrDefault(o => o.UserId == user.Id);
+            order.Products.Add(product);
+            this.Db.Orders.Update(order);
 
-            this.UserProductService.AddProductToUserOrder(product, user);
+            this.Db.SaveChanges();
 
 
-            model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
-            model.User.Order = this.Db.Orders.FirstOrDefault(o => o.UserId == user.Id);
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Guitars).ToList();
+            model.User = user;
+            model.User.Order = order;
+            
             return this.View(model);
         }
 
         public IActionResult Keyboards(UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var userId = HttpContext.User.Identity.Name;
             model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
             model.User.Order = this.Db.Orders.FirstOrDefault(u => u.UserId == model.User.Id);
@@ -98,27 +121,29 @@ namespace MusicStore.Controllers
             {
                 model.User.Order = new Order();
             }
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Keyboards).ToList();
+            
             return this.View(model);
         }
 
         [HttpPost]
         public IActionResult Keyboards(int id, UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var product = this.Db.Products.Find(id);
             var userId = HttpContext.User.Identity.Name;
             var user = this.Db.Users.FirstOrDefault(u => u.Email == userId);
 
-            this.UserProductService.AddProductToUserOrder(product, user);
+            this.UserProductService.AddProductToUserOrderAsync(product, user);
 
             model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
             model.User.Order = this.Db.Orders.FirstOrDefault(o => o.UserId == user.Id);
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Keyboards).ToList();
+            
             return this.View(model);
         }
 
         public IActionResult Woodwinds(UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var userId = HttpContext.User.Identity.Name;
             model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
             model.User.Order = this.Db.Orders.FirstOrDefault(u => u.UserId == model.User.Id);
@@ -126,27 +151,29 @@ namespace MusicStore.Controllers
             {
                 model.User.Order = new Order();
             }
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Woodwinds).ToList();
+            
             return this.View(model);
         }
 
         [HttpPost]
         public IActionResult Woodwinds(int id, UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var product = this.Db.Products.Find(id);
             var userId = HttpContext.User.Identity.Name;
             var user = this.Db.Users.FirstOrDefault(u => u.Email == userId);
 
-            this.UserProductService.AddProductToUserOrder(product, user);
+            this.UserProductService.AddProductToUserOrderAsync(product, user);
 
             model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
             model.User.Order = this.Db.Orders.FirstOrDefault(o => o.UserId == user.Id);
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Woodwinds).ToList();
+            
             return this.View(model);
         }
 
         public IActionResult Brass(UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var userId = HttpContext.User.Identity.Name;
             model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
             model.User.Order = this.Db.Orders.FirstOrDefault(u => u.UserId == model.User.Id);
@@ -154,27 +181,29 @@ namespace MusicStore.Controllers
             {
                 model.User.Order = new Order();
             }
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Brass).ToList();
+            
             return this.View(model);
         }
 
         [HttpPost]
         public IActionResult Brass(int id, UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var product = this.Db.Products.Find(id);
             var userId = HttpContext.User.Identity.Name;
             var user = this.Db.Users.FirstOrDefault(u => u.Email == userId);
 
-            this.UserProductService.AddProductToUserOrder(product, user);
+            this.UserProductService.AddProductToUserOrderAsync(product, user);
 
             model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
             model.User.Order = this.Db.Orders.FirstOrDefault(o => o.UserId == user.Id);
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Brass).ToList();
+           
             return this.View(model);
         }
 
         public IActionResult Accessories(UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var userId = HttpContext.User.Identity.Name;
             model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
             model.User.Order = this.Db.Orders.FirstOrDefault(u => u.UserId == model.User.Id);
@@ -182,22 +211,23 @@ namespace MusicStore.Controllers
             {
                 model.User.Order = new Order();
             }
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Accessories).ToList();
+            
             return this.View(model);
         }
 
         [HttpPost]
         public IActionResult Accessories(int id, UserProductsViewModel model)
         {
+            model.ListOfProducts = this.Db.Products.ToList();
             var product = this.Db.Products.Find(id);
             var userId = HttpContext.User.Identity.Name;
             var user = this.Db.Users.FirstOrDefault(u => u.Email == userId);
 
-            this.UserProductService.AddProductToUserOrder(product, user);
+            this.UserProductService.AddProductToUserOrderAsync(product, user);
 
             model.User = this.Db.Users.FirstOrDefault(u => u.Email == userId);
             model.User.Order = this.Db.Orders.FirstOrDefault(o => o.UserId == user.Id);
-            model.Products = this.Db.Products.Where(p => p.Category == Category.Accessories).ToList();
+            
             return this.View(model);
         }
     }

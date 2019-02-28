@@ -16,6 +16,7 @@ using MusicStore.Models;
 using MusicStore.Services;
 using MusicStore.Services.Interfaces;
 using MusicStore.Utilities;
+using Microsoft.AspNetCore.Session;
 
 namespace MusicStore
 {
@@ -62,12 +63,16 @@ namespace MusicStore
                 options.AccessDeniedPath = $"/Account/AccessDenied";
             });
 
+            
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IUserProductService, UserProductService>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +92,8 @@ namespace MusicStore
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();
+
 
             app.UseAuthentication();
 

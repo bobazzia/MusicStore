@@ -45,8 +45,10 @@ namespace MusicStore.Services
                 UserName = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                PhoneNumber = model.PhoneNumber
+                PhoneNumber = model.PhoneNumber,
             };
+           
+            
             await this.SignIn.UserManager.CreateAsync(user, model.Password);
             if (this.SignIn.UserManager.Users.Count() == 1)
             {
@@ -56,6 +58,15 @@ namespace MusicStore.Services
                     return SignInResult.Failed;
                 }
             }
+
+            var order = new Order()
+            {
+                UserId = user.Id,
+                User = user
+            };
+            this.DbContext.Orders.Add(order);
+            this.DbContext.SaveChanges();
+            
             var result = await SignIn.PasswordSignInAsync(user, model.Password, true, false);
 
             return result;

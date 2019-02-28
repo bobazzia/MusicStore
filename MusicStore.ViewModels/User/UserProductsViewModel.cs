@@ -7,11 +7,11 @@ namespace MusicStore.ViewModels.User
     {
         public UserProductsViewModel()
         {
-            this.Products = new List<Product>();
+            this.ListOfProducts = new List<Product>();
         }
 
         public MusicStoreUser User { get; set; }
 
-        public List<Product> Products { get; set; }
+        public List<Product> ListOfProducts { get; set; }
     }
 }

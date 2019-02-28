@@ -22,6 +22,10 @@ namespace MusicStore.Models
         public Category Category { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+        
+        //public int? OrderId { get; set; }
+
+        //public virtual Order Order { get; set; }
 
     }
 }

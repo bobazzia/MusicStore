@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicStore.Data;
 
 namespace MusicStore.Data.Migrations
 {
     [DbContext(typeof(MusicStoreDbContext))]
-    partial class MusicStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190225124054_AddVirtualOrderInProduct")]
+    partial class AddVirtualOrderInProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,7 +269,7 @@ namespace MusicStore.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("OrderId");
+                    b.Property<int>("OrderId");
 
                     b.Property<double>("Price");
 
@@ -374,9 +376,10 @@ namespace MusicStore.Data.Migrations
 
             modelBuilder.Entity("MusicStore.Models.Product", b =>
                 {
-                    b.HasOne("MusicStore.Models.Order")
+                    b.HasOne("MusicStore.Models.Order", "Order")
                         .WithMany("Products")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MusicStore.Models.Sale")
                         .WithMany("Products")

@@ -1,6 +1,6 @@
 ﻿@model MusicStore.ViewModels.User.UserProductsViewModel
 <h1 class="text-center text-capitalize glyphicon-bold">S T R I N G S</h1>
-<h3 class="text-center text">Hello, @Model.User.FirstName @Model.User.LastName! Your have <span class="text-primary">(@Model.User.Order.Products.Count)</span> products in your order!</h3>
+<h3 class="text-center text">Hello, @Model.User.FirstName @Model.User.LastName! Your have <a asp-controller="UserProfile" asp-action="Order" asp-route-id="@Model.User.Order.Id" class="text-primary">(@Model.User.Order.Products.Count)</a> products in your order!</h3>
 <hr/>
 <table class="table table-striped">
     <thead class="thead-dark">
@@ -12,7 +12,7 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var product in Model.Products)
+    @foreach (var product in Model.ListOfProducts.Where(p => p.Category == Category.Strings))
     {
         <tr>
             <td>@product.Name</td>

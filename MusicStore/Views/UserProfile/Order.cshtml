@@ -1,0 +1,35 @@
+﻿@model MusicStore.ViewModels.User.UserOrder
+
+<h1 class="text-center text-capitalize glyphicon-bold ">Y O U R &nbsp&nbsp&nbsp O R D E R</h1>
+<h3 class="text-center">Total price for yor order is <span class="text-primary">@Model.Order.Products.Sum(p => p.Price)$</span></h3>
+<hr />
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Order.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>
+                    <a href="~/images/@product.Image" target="_blank">
+                        <img src="~/images/@product.Image" width="80" height="80" alt='some thumbnail' />
+                    </a>
+                </td>
+                <td>@product.Price</td>
+                <td>
+                    <form method="post" asp-controller="UserProfile" asp-action="DeleteProduct" asp-route-id="@product.Id">
+                        <button type="submit" data-item-id="@product.Id">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

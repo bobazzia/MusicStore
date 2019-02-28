@@ -3,7 +3,7 @@
 
 <div class="container panel-body">
     <div class="row, text-center">
-        Products
+        ListOfProducts
         <div>
             @if (Model.Sales.Count == 0)
             {
@@ -20,7 +20,7 @@
                             Sale PercentOff
                         </div>
                         <div class="col-md-3">
-                            Products
+                            ListOfProducts
                         </div>
                     </div>
                     <br/>
@@ -37,7 +37,7 @@
                             </div>
                             @if (sale.Products.Count == 0)
                             {
-                                <a asp-controller="AdministratorSales" asp-action="AddProducts" class="col-md-3"> Add Products</a>
+                                <a asp-controller="AdministratorSales" asp-action="AddListOfProducts" class="col-md-3"> Add ListOfProducts</a>
                             }
                             else
                             {

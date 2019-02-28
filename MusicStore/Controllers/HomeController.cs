@@ -4,15 +4,23 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MusicStore.Data;
 using MusicStore.Models;
+
 
 namespace MusicStore.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        public HomeController(MusicStoreDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public IActionResult Index()
         {
+           
             return View();
         }
         
@@ -40,5 +48,6 @@ namespace MusicStore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        
     }
 }

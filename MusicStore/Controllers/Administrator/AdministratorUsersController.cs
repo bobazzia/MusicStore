@@ -32,6 +32,7 @@ namespace MusicStore.Controllers.Administrator
             if (user.Order != null)
             {
                 this.Db.Orders.Remove(user.Order);
+                this.Db.SaveChanges();
             }
             user.Order = null;
             this.Db.Users.Remove(user);

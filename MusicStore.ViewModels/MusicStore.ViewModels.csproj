@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MusicStore.CustomDataAnnotations\MusicStore.CustomDataAnnotations.csproj" />
     <ProjectReference Include="..\MusicStore.Models\MusicStore.Models.csproj" />
   </ItemGroup>
 

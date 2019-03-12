@@ -44,7 +44,7 @@ namespace MusicStore.Controllers
             }
             
             
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Home", "User");
         }
 
         public IActionResult Register()

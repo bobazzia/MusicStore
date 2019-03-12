@@ -32,9 +32,9 @@ namespace MusicStore.Services
 
         public async Task<SignInResult> RegisterUser(RegisterViewModel model)
         {
-            bool uniqueEmail = this.SignIn.UserManager.Users.Any(x => x.Email != model.Email);
+            bool uniqueEmail = this.DbContext.Users.Any(x => x.Email == model.Email);
 
-            if (!uniqueEmail)
+            if (uniqueEmail)
             {
                 return SignInResult.Failed;
             }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MusicStore.CustomDataAnnotations;
 
 namespace MusicStore.ViewModels.Account
 {
@@ -8,6 +9,7 @@ namespace MusicStore.ViewModels.Account
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
+        [MailNotExist]
         public string Email { get; set; }
 
         [Required]
@@ -16,7 +18,7 @@ namespace MusicStore.ViewModels.Account
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [NotMapped]
+        [Required]
         [Compare("Password")]
         [Display(Name = "Confirm password")]
         [DataType(DataType.Password)]

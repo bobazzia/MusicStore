@@ -55,6 +55,10 @@ namespace MusicStore.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
             var result = this.UserService.RegisterUser(model).Result;
             
             if (result.Succeeded)

@@ -32,13 +32,6 @@ namespace MusicStore.Services
 
         public async Task<SignInResult> RegisterUser(RegisterViewModel model)
         {
-            bool uniqueEmail = this.DbContext.Users.Any(x => x.Email == model.Email);
-
-            if (uniqueEmail)
-            {
-                return SignInResult.Failed;
-            }
-
             var user = new MusicStoreUser()
             {
                 Email = model.Email,
@@ -47,9 +40,9 @@ namespace MusicStore.Services
                 LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
             };
-           
-            
+
             await this.SignIn.UserManager.CreateAsync(user, model.Password);
+
             if (this.SignIn.UserManager.Users.Count() == 1)
             {
                 var roleResult = this.SignIn.UserManager.AddToRoleAsync(user, "Administrator").Result;
